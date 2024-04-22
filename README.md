@@ -1,7 +1,7 @@
-"""
-Projekt Machine Learning: Klasyfikacja cen telefonów
 
-Opis projektu:
+#Projekt Machine Learning: Klasyfikacja cen telefonów
+
+##Opis projektu:
 Celem tego projektu było stworzenie modelu uczenia maszynowego, który umożliwiałby precyzyjne przypisanie telefonów do odpowiednich przedziałów cenowych na podstawie ich różnorodnych parametrów technicznych. Dane wykorzystane w projekcie zostały pozyskane z publicznego zbioru danych z platformy Kaggle, dostępnego pod adresem https://www.kaggle.com/datasets/ahmedghonem01/phones-price-classification. Zbiór ten zawiera informacje na temat kategorii cen telefonów oraz ich cech.
 
 Dane:
@@ -25,4 +25,4 @@ Autorzy:
 
 Wnioski:
 W ramach projektu udało się zbudować skuteczny model klasyfikacji cen telefonów na podstawie ich parametrów technicznych. Wyniki sugerują, że możliwe jest precyzyjne przewidywanie cen telefonów na podstawie danych dostępnych w zbiorze.
-"""
+
