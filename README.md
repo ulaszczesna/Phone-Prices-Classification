@@ -1,22 +1,51 @@
-# Projekt Machine Learning: Klasyfikacja cen telefonów
+# Prognozowanie cen telefonów na podstawie ich parametrów technicznych
 
-## Opis projektu
-Celem tego projektu było stworzenie modelu uczenia maszynowego, który umożliwiałby precyzyjne przypisanie telefonów do odpowiednich przedziałów cenowych na podstawie ich różnorodnych parametrów technicznych. Dane wykorzystane w projekcie zostały pozyskane z publicznego zbioru danych z platformy Kaggle, dostępnego pod adresem [link do zbioru danych](https://www.kaggle.com/datasets/ahmedghonem01/phones-price-classification). Zbiór ten zawiera informacje na temat kategorii cen telefonów oraz ich cech.
+## Opis Projektu
+Celem projektu było stworzenie modelu uczenia maszynowego, który na podstawie parametrów technicznych telefonów klasyfikowałby je do odpowiednich przedziałów cenowych. Wykorzystano do tego dane z platformy Kaggle, zawierające informacje na temat różnych cech telefonów oraz ich kategorii cenowych.
 
 ## Dane
-- Zbiór danych został pozyskany z platformy Kaggle i zawiera różnorodne informacje na temat telefonów, takie jak ilość pamięci ram, rozdzielczość apartau, rozmiar ekranu, pojemność baterii, itp.
-- Dane są podzielone na kategorie cenowe, co zmienia problem regresji na klasyfikację.
+- **Źródło**: Dane pochodzą z publicznego zbioru danych na platformie Kaggle, dostępnego [tutaj](https://www.kaggle.com/datasets/ahmedghonem01/phones-price-classification).
+- **Zawartość**: Zbiór danych składał się z 21 kolumn o wartościach liczbowych, bez brakujących danych. Kolumna `price_range` była zmienną celu z wartościami od 0 do 3.
 
-## Metoda
-W projekcie zastosowano metodę klasyfikacji, która pozwoliła na dokładne przypisanie telefonów do odpowiednich przedziałów cenowych. Do tego celu wykorzystano różnorodne algorytmy uczenia maszynowego, takie jak Random Forest, Support Vector Machine oraz K-Nearest Neighbors.
+## Przygotowanie Danych
+1. **Przegląd danych**: Sprawdzenie kolumn i typów danych oraz braków danych.
+2. **Skalowanie**: Ze względu na duże różnice w zakresach wartości, dane zostały przeskalowane za pomocą MinMaxScalera.
+3. **Analiza korelacji**: Sprawdzenie zależności pomiędzy parametrami technicznymi a ceną telefonów przy użyciu macierzy korelacji.
 
-## Użyte narzędzia
-- Język programowania: Python
-- Biblioteki: Pandas, NumPy, Scikit-learn, dalex
-- Środowisko pracy: Jupyter Notebook
+## Inżynieria Cech i Wstępne Modelowanie
+Przeprowadzono testy na kilku prostych modelach klasyfikacyjnych:
+- Drzewo decyzyjne
+- K-Nearest Neighbors
+- Regresja logistyczna
+- Support Vector Machine
+- Gaussian Naive Bayes
 
-## Wyniki
-- Model osiągnął dokładność klasyfikacji na poziomie 98% na zbiorze testowym.
+Model regresji logistycznej osiągnął najlepsze wyniki, z dokładnością na poziomie 98%.
+
+## Pierwszy Model: Regresja Logistyczna
+Dla finalnego modelu regresji logistycznej, przeprowadzono dostrajanie hiperparametrów za pomocą Grid Search:
+- **max_iter**: 6000
+- **solver**: 'saga'
+- **penalty**: 'none'
+- **C**: 0.001
+- **l1_ratio**: 0.1
+
+### Wyniki Modelu:
+- **Precyzja**: 1.00 dla klasy 0.
+- **Czułość (Recall)**: Powyżej 0.97 dla wszystkich klas.
+- **Dokładność (Accuracy)**: 0.98.
+
+## Drugi Model: Stacked Classifier
+Dla porównania, zbudowano model Stacked Classifier, który osiągnął średnią dokładność 93.85% w krzyżowej walidacji.
+
+## Porównanie Modeli
+Logistic Regression osiągnął lepsze wyniki w porównaniu do Stacked Classifier, jednak oba modele wykazały dobrą wydajność.
+
+## Ewaluacja Modelu z Wykorzystaniem Technik Wyjaśnialnej Sztucznej Inteligencji
+Przeprowadzono analizę wpływu poszczególnych zmiennych na wyniki modelu za pomocą metod `model_parts` oraz `permutation_importance`:
+- **RAM**: Najważniejsza zmienna, odpowiadająca za około 70% dokładności modelu.
+- **Battery power**: Istotna zmienna, ale z mniejszym wpływem (25% dokładności).
+- Inne zmienne miały minimalny wpływ na predykcje modelu.
 
 
 ## Autorzy
